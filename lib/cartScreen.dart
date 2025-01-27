@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:locat_databse_practice/db/db_helper.dart';
 
 class CartScreen extends StatefulWidget {
@@ -9,7 +11,18 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   final DatabaseHelper dbHelper = DatabaseHelper.instance;
+  late Future<List<Map<String, dynamic>>> _cartItemsFuture;
 
+  @override
+  void initState() {
+    super.initState();
+    _refreshCart(); // Load the cart items initially
+  }
+void _refreshCart() {
+  setState(() {
+    _cartItemsFuture = dbHelper.getCartItems();
+  });
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +35,7 @@ class _CartScreenState extends State<CartScreen> {
         future: dbHelper.getCartItems(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(child: CupertinoActivityIndicator(radius: 32, color: Colors.blue));
+            return Center(child: CupertinoActivityIndicator(radius: 50, color: Colors.blue));
           }
           if (snapshot.data!.isEmpty) {
             return Center(
@@ -56,6 +69,7 @@ class _CartScreenState extends State<CartScreen> {
                           SnackBar(content: Text('${item['name']} removed from cart!')),
                         );
                         (context as Element).reassemble();
+                        _refreshCart();
                       },
                     ),
                   ),
