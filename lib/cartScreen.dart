@@ -16,7 +16,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
   void initState() {
     super.initState();
-    _refreshCart(); // Load the cart items initially
+    _refreshCart();
   }
 void _refreshCart() {
   setState(() {
