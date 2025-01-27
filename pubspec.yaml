@@ -38,6 +38,7 @@ dependencies:
   sqflite: ^2.4.1
   sqflite_common_ffi: ^2.3.4+4
   get: ^4.6.6
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:locat_databse_practice/CartScreen.dart';
+import 'package:locat_databse_practice/base/app_colors.dart';
+import 'package:locat_databse_practice/base/custom_button.dart';
 import 'package:locat_databse_practice/db/db_helper.dart';
 import 'package:locat_databse_practice/db/product.dart';
 
@@ -67,7 +69,8 @@ class _AddToCartScreenState extends State<AddToCartScreen> {
             Center(
               child: ElevatedButton(
                 onPressed: _addToCart,
-                child: Text('Add to Cart'),
+                child: Text('Add to Cart',style: TextStyle(color: Colors.white)),
+                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(AppColors.primaryColor)),
               ),
             ),
 
